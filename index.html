@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Rubik's Cube Game</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #bdbababb;
+    }
+
+    header {
+      background-color: #333;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+    }
+    header h1{
+            margin-bottom: 10px;
+      font-weight: 900;
+      font-size: 2.5rem;
+      letter-spacing: 2px;
+      text-shadow: 0 0 10px #00d4ff;
+    }
+
+    main {
+      padding: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    footer {
+      text-align: center;
+      padding: 10px 0;
+      background-color: #333;
+      color: white;
+      position: fixed;
+      width: 100%;
+      bottom: 0;
+    }
+    .cube {
+      width: 60%;
+      height: 100vh;
+    
+      margin: 0 auto;
+      font-size: 24px;
+      color: #333;
+    }
+        #container, .cube{
+      perspective: 1200px;
+      width: 360px;
+      height: 360px;
+      margin-bottom: 50px;
+      position: relative;
+    }
+    .btn{
+      width: 30%;
+      height: 100vh;
+    }
+
+
+     #cube {
+      width: 300px;
+      height: 300px;
+      position: relative;
+      margin: auto;
+      transform-style: preserve-3d;
+      transition: transform 0.6s ease;
+      cursor: grab;
+
+    }
+    .face {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      border: 2px solid #000000;
+      background: #000000;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 1fr);
+      box-shadow: inset 0 0 20px #00000000;
+      border-radius: 10px;
+    }
+    /* Rubik's Cube faces */
+    .face.front  { transform: translateZ(150px); }
+    .face.back   { transform: rotateY(180deg) translateZ(150px); }
+    .face.left   { transform: rotateY(-90deg) translateZ(150px); }
+    .face.right  { transform: rotateY(90deg) translateZ(150px); }
+    .face.top    { transform: rotateX(90deg) translateZ(150px); }
+    .face.bottom { transform: rotateX(-90deg) translateZ(150px); }
+
+    /* Small squares inside faces */
+    .sticker {
+      border: 2.5px solid #000000;
+      border-radius: 5px;
+      margin: 4px;
+      box-shadow: inset 0 0 7px rgba(0,0,0,0.8);
+      transition: background-color 0.3s ease;
+    }
+    /* Colors */
+    .white   { background-color: #ffffff;border: 2.5px solid #ffffff;}
+    .yellow  { background-color: #ffec00;border: 2.5px solid #ffec00;}
+    .green   { background-color: #009f4d;border: 2.5px solid #009f4d;}
+    .blue    { background-color: #0452ff; border: 2.5px solid #0425ff;}
+    .orange  { background-color: #ff6200; border: 2.5px solid #ff6200;}
+    .red     { background-color: #cc0000; border: 2.5px solid #cc0000;}
+
+    /* Controls styling */
+    #controls {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 360px;
+      justify-content: center;
+      gap: 6px;
+      margin: 20px auto;
+    }
+    button {
+      background: #222;
+      border: none;
+      border-radius: 6px;
+      color: #ddd;
+      padding: 10px 16px;
+      font-size: 1rem;
+      box-shadow: 0 0 8px #00d4ff88;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      user-select: none;
+    }
+    button:hover {
+      background: #00d4ff;
+      color: #222;
+      box-shadow: 0 0 15px #00d4ffcc;
+    }
+
+    /* Drag cursor changes */
+    #cube.grabbing {
+      cursor: grabbing;
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <h1>Rubik's Cube Game</h1>
+  </header>
+  <main>
+      <div class="cube">
+                <div id="container">
+    <div id="cube" tabindex="0" aria-label="3D Rubik's Cube"></div>
+  </div>
+      </div>
+
+      <div class="btn">
+          <div id="controls">
+   
+    <!-- Face rotate buttons -->
+    <button data-rotate="U">Rotate Up (U)</button>
+    <button data-rotate="Ui">Rotate Up Inverse (U')</button>
+    <button data-rotate="D">Rotate Down (D)</button>
+    <button data-rotate="Di">Rotate Down Inverse (D')</button>
+    <button data-rotate="L">Rotate Left (L)</button>
+    <button data-rotate="Li">Rotate Left Inverse (L')</button>
+    <button data-rotate="R">Rotate Right (R)</button>
+    <button data-rotate="Ri">Rotate Right Inverse (R')</button>
+    <button data-rotate="F">Rotate Front (F)</button>
+    <button data-rotate="Fi">Rotate Front Inverse (F')</button>
+    <button data-rotate="B">Rotate Back (B)</button>
+    <button data-rotate="Bi">Rotate Back Inverse (B')</button>
+    <button id="shuffle">Shuffle</button>
+    <button id="reset">Reset</button>
+  </div>
+      </div>
+  </main>
+  <footer>
+      <div id="info">
+    Use buttons or keyboard keys (U, D, L, R, F, B) and Shift for inverse (e.g., Shift+U).<br/>
+  </div>
+  </footer>
+ <script src="script.js"></script>
+ </body>
+ </html>
